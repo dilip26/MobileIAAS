@@ -1,5 +1,6 @@
 import os
 import  time
+
 ls = os.listdir("/home/akshay/erase/")
 while (len(ls) == 0):
     ls = os.listdir("/home/akshay/erase/")
@@ -22,11 +23,12 @@ if r == 1:
             fs.write(ls[1] + " " + ls[0])
             print ls[1] + " " + ls[0]
         f += 1
+    fs.close();
     time.sleep(5)
-    os.popen("scp /home/akshay/myclients.txt cool@192.168.12.206:/home/cool/child/")
+    os.popen("scp /home/akshay/myclients.txt sourabh@192.168.12.1:/home/sourabh/child/")
     print "sentss"
     time.sleep(3)
-    os.remove("/home/akshay/myclients.txt")
+    #os.remove("/home/akshay/myclients.txt")
     os.remove("/home/akshay/erase/"+fname)
 else:
     print "kuchh toh baki hai"
