@@ -1,5 +1,5 @@
 import os,socket
-
+search = "1"
 myClients = []
 def list_clients():
     x = os.popen('create_ap --list-client ap0')
@@ -15,9 +15,15 @@ def list_clients():
         f += 1
     return clients
 
+def getHostName():
+    f = os.popen('ifconfig ap0|grep \'inet addr:\'|awk \'{print substr($2,6,length($2)-1)}\'')
+    host = f.readline()
+    return host[0:-1]
+
 serverSockect = socket.socket()  # Create a socket object
 def server(clients):
-    host = "192.168.12.1"  # Get local machine name
+    host = getHostName()  # Get local machine name
+    print host
     port = 12345  # Reserve a port for your service.
     serverSockect.bind((host, port))  # Bind to the port
     serverSockect.listen(clients)
@@ -26,28 +32,29 @@ def server(clients):
     while clients!=0:
         c, addr = serverSockect.accept()  # Establish connection with client.
         print 'Got connection from', addr
-        c.send("1")
+        c.send(search)
         myClients.append(c.recv(1024))
-        # print clients
-        clients-=1
+        print clients
         c.close()
-    return c
+        clients-=1
+
+    return len(myClients)
     # print c.recv(1024)
     # c.send('Thank you for connecting')
     # c.close()
 
 print "Requirements: "
-nodes = int(input())
+requiredNodes = int(input())
 t = 0
 f = open("Paths.txt","r+")
 clients = list_clients()
-if (nodes - clients) > 0:
+discoveredNodes = server(clients)
+if (requiredNodes - (discoveredNodes+clients)) > 0:
     print clients
-    c = server(clients)
     # print myClients
-    data = f.readline()
+    # data = f.readline()
     # for d in data:
-    # print data
+    print discoveredNodes
     # c = 1
     for i in myClients:
         # for d in data:
