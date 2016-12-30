@@ -19,13 +19,20 @@ def list_client(sc):
 	return mac
 
 sc = socket.socket()
-
-sc.connect(("localhost",12345))
-mac=list_client(sc)
-myMAC = os.popen("ifconfig | grep 'w' | awk '{print $5}'")
-finalMAC= myMAC.read(17) + "->" + mac
-# print finalMAC
-sc.send(finalMAC)
+sc.connect(("192.168.12.1",12345))
+print 'connected'
+ip=sc.recv(1024)
+print ip
+ip=int(ip)
+if(int(ip)==1):
+	mac=list_client(sc)
+	myMAC = os.popen("ifconfig | grep 'w' | awk '{print $5}'")
+	finalMAC= myMAC.read(17) + "->" + mac
+	# print finalMAC
+	sc.send(finalMAC)
+else:
+	ip-=1
+	print 'req sent to the user'
 
 '''ss=socket.socket()
 host=socket.gethostname()
