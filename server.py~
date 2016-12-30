@@ -1,0 +1,15 @@
+import os
+
+print "Enter required nodes"
+nodes = int(input())
+def listClients():
+	x=os.popen('create_ap --list-client ap0')
+	f = x.read()
+	list=f.split('\n')
+	f=0
+	for i in list:
+		if f!=0 and f<(len(list)-1):
+			ls=i.split()
+			print ls[1]+" "+ls[0]
+	f+=1
+
