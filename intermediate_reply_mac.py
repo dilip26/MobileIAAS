@@ -23,6 +23,7 @@ def server(ip,count):   #code execujted when ip receive greater than 1
     ss=socket.socket()
     host = get_host_name()  # Get local machine name
     port = 12345  # Reserve a port for your service.
+
     ss.bind((host, port))  # Bind to the pohttps://www.youtube.com/watch?v=O1Q0pMeIZBwrt
     ss.listen(count) # it will wait untill all of its clients replay it
     print "Listening"
@@ -70,6 +71,7 @@ def list_client(sc):
     return finalMAC
 
 
+print "Running"
 sc = socket.socket()
 sc.connect((get_parent_host_name(),12345))
 print 'connected'
