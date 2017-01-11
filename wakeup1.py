@@ -12,6 +12,7 @@ if len(tokens)==2:
     os.chdir("/erase")
     print "in storage "
     os.rename(files[0],"/storage/"+tokens[1])
+    os.system('python Ack.py')
 else:
     newname = ""
     i = 1
