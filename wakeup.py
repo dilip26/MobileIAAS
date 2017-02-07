@@ -1,4 +1,4 @@
-//designed by dilip
+# designed by dilip
 
 import os
 
