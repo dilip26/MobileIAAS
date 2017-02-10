@@ -13,4 +13,4 @@ def Get_ips(mac):
                 ip+=ls[1]+' '
         f += 1
     return ip
-print Get_ips('64:db:43:4f:1b:72')
+print Get_ips('64:db:4:4f:1b:72')
